@@ -29,9 +29,17 @@ require("lazy").setup({
 	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
+		--config = function()
+		--	vim.o.background = "dark"
+		--	vim.cmd([[colorscheme gruvbox]])
+		--end
+	},
+	{
+		'nordtheme/vim',
+		priority = 1000,
 		config = function()
 			vim.o.background = "dark"
-			vim.cmd([[colorscheme gruvbox]])
+			vim.cmd([[colorscheme nord]])
 		end
 	},
 
