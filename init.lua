@@ -143,10 +143,33 @@ require("lazy").setup({
 		end
 	},
 
+	-- Add modicator
+	{
+		'mawkler/modicator.nvim',
+		dependencies = 'nordtheme/vim',
+		init = function()
+			vim.o.cursorline = true
+			vim.o.number = true
+			vim.o.termguicolors = true
+		end,
+		opts = {
+			show_warnings = true,
+		}
+	},
+
+	-- Lualine
+	{
+		'nvim-lualine/lualine.nvim',
+		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		config = function()
+			require("lualine").setup {}
+		end
+	},
+
 	-- Enable transpacency
 	{
 		'tribela/transparent.nvim',
 		event = 'VimEnter',
 		config = true,
-	}
+	},
 })
