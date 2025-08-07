@@ -15,6 +15,10 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
+-- disable netrw for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Diagnostic config
 vim.diagnostic.config({
 	virtual_text = true,
@@ -128,7 +132,7 @@ require("lazy").setup({
 		build = 'cargo +nightly build --release'
 	},
 
-	-- Telescope file searcher
+	-- Telescope file search dialogue
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = '0.1.8',
@@ -143,7 +147,20 @@ require("lazy").setup({
 		end
 	},
 
-	-- Add modicator
+	-- Nvim tree
+	{
+		'nvim-tree/nvim-tree.lua',
+		config = function()
+			local api = require("nvim-tree.api")
+			local function opts(desc)
+				return { desc = "nvim-tree: " .. desc, noremap = true, silent = true, nowait = true }
+			end
+			vim.keymap.set('n', '<leader>ft', api.tree.toggle, opts('Toggle'))
+			require("nvim-tree").setup {}
+		end
+	},
+
+	-- Modicator
 	{
 		'mawkler/modicator.nvim',
 		dependencies = 'nordtheme/vim',
@@ -164,6 +181,14 @@ require("lazy").setup({
 		config = function()
 			require("lualine").setup {}
 		end
+	},
+
+	-- Treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = 'master',
+		lazy = false,
+		build = ":TSUpdate",
 	},
 
 	-- Enable transpacency
